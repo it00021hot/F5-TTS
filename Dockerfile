@@ -18,8 +18,7 @@ WORKDIR /workspace
 
 COPY . .
 
-RUN git submodule update --init --recursive \
-    && pip install -e . --no-cache-dir \
+RUN pip install -e . --no-cache-dir
 
 
 
