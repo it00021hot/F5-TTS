@@ -16,15 +16,17 @@ RUN set -x \
     
 WORKDIR /workspace
 
-RUN git clone https://github.com/SWivid/F5-TTS.git \
-    && cd F5-TTS \
-    && git submodule update --init --recursive \
-    && pip install -e . --no-cache-dir
+COPY . .
+
+RUN git submodule update --init --recursive \
+    && pip install -e . --no-cache-dir \
+
+
 
 ENV SHELL=/bin/bash
 
 VOLUME /root/.cache/huggingface/hub/
 
-EXPOSE 7860
+EXPOSE 7861
 
-WORKDIR /workspace/F5-TTS
+CMD ["python","src/f5_tts/infer_api.py"]
